@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        'xs': '475px',
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Daily Dev Challenge</title>
+    <!-- Font Awesome Free CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Header Section Start -->
+<header class="bg-gray-900 text-white py-2 border-b border-gray-700 fixed top-0 left-0 w-full z-50">
+
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html" class="flex items-center">
+                    <i class="fa-brands fa-digital-ocean text-2xl"></i> 
+                    <span class="text-xl sm:text-2xl font-semibold ml-1">daily</span> 
+                    <span class="text-gray-400 hidden xs:inline">.dev</span>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Search Bar - Hidden on small mobile, visible otherwise -->
+                <div class="relative hidden sm:block sm:w-40 md:w-56 lg:w-64 xl:w-80">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input 
+                        type="search" 
+                        placeholder="Search"
+                        class="border border-gray-700 bg-gray-800 focus:outline-none py-1 sm:py-2 pl-10 pr-3 rounded-2xl w-full text-sm">
+                 </div>
+                 
+          
+                 <div class="sm:hidden text-gray-400 p-2">
+                    <i class="fa-solid fa-magnifying-glass text-xl"></i>
+                 </div>
+
+                <!-- Level Up Button - Hidden on small screens, visible on medium and up -->
+                <button class="hidden md:flex items-center bg-green-400 py-1 md:py-2 px-3 md:px-4 cursor-pointer border-2 border-transparent rounded-lg hover:bg-transparent hover:border-green-500 text-black font-bold hover:text-white text-sm md:text-base">
+                    <i class="fa-solid fa-star mr-1"></i> <span class="hidden lg:inline">Level up</span>
+                </button>
+                
+                <span class="bg-gray-700 p-2 sm:p-3 rounded-xl inline-flex items-center justify-center">
+                    <i class="fa-solid fa-bell text-gray-200 text-sm sm:text-base"></i>
+                </span>
+
+                <div class="bg-gray-800 rounded-xl inline-flex items-center justify-center">
+                    <span class="bg-gray-800 text-pink-600 rounded inline-flex items-center justify-center p-1">
+                        <i class="fa-regular fa-circle text-lg sm:text-xl mr-1"></i>
+                        <span class="text-sm sm:text-base font-bold">1</span>
+                    </span>
+
+                    <span class="bg-gray-800 text-amber-400 p-1 rounded inline-flex items-center justify-center">
+                        <i class="fa-solid fa-square text-lg sm:text-xl mr-1"></i>
+                        <span class="text-sm sm:text-base font-bold">0</span>
+                    </span>
+
+                    <span class="bg-gray-800 p-1 rounded inline-flex items-center justify-center">
+                        <i class="fa-solid fa-bolt text-lg sm:text-xl mr-1 text-purple-600"></i>
+                        <span class="text-sm sm:text-base font-bold">10</span>
+                    </span>
+                   
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small_2x/Basic_Ui__28186_29.jpg" 
+                         alt="user image" 
+                         class="w-6 h-6 sm:w-8 sm:h-8 rounded-full mx-1 sm:mx-2">
+                </div>
+            </div>
+        </div>
+     </header>
+    <!-- Header Section End -->
+
+
+
+
+<!-- h-screen w-64 bg-gray-900  text-white border-r border-gray-700 p-3 overflow-y-auto shrink-0 -->
+
+
+    <!-- Mobile Menu Button -->
+  <!-- Mobile Header -->
+<div class="bg-gray-900 border-b border-gray-700 p-2 flex justify-between items-center fixed top-10 left-0 w-full z-50 md:hidden">
+    <button id="mobileMenuButton" class="text-white p-2 rounded-lg bg-gray-800">
+        <i class="fa-solid fa-bars"></i> Menu
+    </button>
+    <button class="bg-white p-2 text-black rounded-lg text-sm font-bold">+ New</button>
+</div>
+
+
+
+    <!-- Blog Section Start -->
+    <section class="flex flex-col md:flex-row bg-gray-900 text-white min-h-screen  overflow-y-auto shrink-0">
+            <!-- Sidebar -->
+        <div id="sidebar" class="hidden md:block md:w-64 bg-gray-900 text-white border-r border-gray-700 p-3 fixed top-14 left-0 h-[calc(100vh-3.5rem)] overflow-y-auto">
+
+
+
+            <div class="md:show flex justify-between items-center mb-4">
+                <h4 class="text-xl font-semibold">Menu</h4>
+                <span id="closeSidebar" class="mr-3 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </span>
+            </div>
+            
+            <button class="bg-white p-2 text-black rounded-lg w-full mt-1 cursor-pointer text-base font-bold md:mt-1">+ New</button>
+         
+            <div class="mt-4">
+                <h4 class="flex items-center gap-2 cursor-pointer font-bold p-2 rounded hover:bg-gray-800">
+                    <img class="w-8 h-8 rounded-full" src="https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small_2x/Basic_Ui__28186_29.jpg" alt="">
+                    For You
+                </h4>
+                <div class="mt-1">
+                    <ul>
+                        <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                            <span class="text-lg"><i class="fa-solid fa-person pr-2"></i></span>Following
+                        </li>
+                        <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                            <span class="text-lg"><i class="fa-brands fa-wpexplorer pr-2"></i></span>Explore
+                        </li>
+                        <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                            <span class="text-lg"><i class="fa-solid fa-eye pr-2"></i></span>History
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Custom Feeds -->
+            <div class="mt-6">
+                <h4 class="uppercase font-bold text-gray-400 text-xs mb-2 flex justify-between items-center">
+                    <span>Custom feeds</span>
+                    <i class="fa-solid fa-angle-up"></i>
+                </h4>
+                <ul>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-hashtag mr-2"></i> New feed 6
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-hashtag mr-2"></i> Yet another feed
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-hashtag mr-2"></i> Another new feed
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-hashtag mr-2"></i> My new feed
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-hashtag mr-2"></i> Another new feed
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-hashtag mr-2"></i> New feed 6
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-plus mr-2"></i> Custom feed
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Network -->
+            <div class="mt-6">
+                <h4 class="uppercase font-bold text-gray-400 text-xs mb-2 flex justify-between items-center">
+                    <span>Network</span>
+                    <i class="fa-solid fa-angle-up"></i>
+                </h4>
+                <ul>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <span class="text-lg mr-2">✦</span> Find Squads
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <span class="text-lg mr-2">＋</span> New Squad
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Bookmarks -->
+            <div class="mt-6">
+                <h4 class="uppercase font-bold text-gray-400 text-xs mb-2 flex justify-between items-center">
+                    <span>Bookmarks</span>
+                    <i class="fa-solid fa-angle-up"></i>
+                </h4>
+                <ul>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        📑 Presidential briefings
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        💾 Quick saves
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        📖 Read it later
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        📂 New folder
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-6">
+                <h4 class="uppercase font-bold text-gray-400 text-xs mb-2 flex justify-between items-center">
+                    <span>Discover</span>
+                    <i class="fa-solid fa-angle-up"></i>
+                </h4>
+                <ul>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-hashtag mr-2"></i> Tags
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-globe mr-2"></i> Source
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-people-group mr-2"></i> Leaderboard
+                    </li>
+                    <li class="p-2 rounded hover:bg-gray-800 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-message mr-2"></i> Discussions
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+       <div class="flex-1 p-3 md:p-4 lg:p-6 pt-20 md:pt-6 md:ml-64 md:mt-16">
+
+
+            <div class="flex flex-wrap gap-3 mb-4">
+                <button class="bg-gray-700 p-2 text-white rounded-lg font-semibold cursor-pointer hover:bg-gray-800 duration-300 flex items-center">
+                    <i class="fa-solid fa-sliders mr-2"></i>Feed Settings
+                </button>
+                <button class="bg-gray-800 p-2 text-white rounded-lg font-bold cursor-pointer hover:bg-gray-900 duration-300 hover:border-2 hover:border-green-500 flex items-center">
+                    <i class="fa-solid fa-book-open-reader mr-2"></i>5/5
+                </button>
+            </div>
+
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    
+                <!-- Card 1 -->
+                <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon2.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">Delivering software and services over the internet without local servers</h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img8.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>32</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>6</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-gray-800 p-4 md:p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                        <img class="w-8 h-8 md:w-10 md:h-10 rounded-full" src="./image/img13.jpg" alt="">
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold my-3">Algorithms that allow software to learn and improve from data.</h2>
+                    <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                        <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                        <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                        <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                        <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                    </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                    <div class="bg-gray-700 rounded-lg flex items-center justify-center h-32 md:h-40 mb-4 overflow-hidden">
+                        <img src="./image/img9.jpg" 
+                            alt="image" 
+                            class="object-cover w-full h-full rounded-lg">
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center justify-between p-2 rounded-lg text-gray-300 font-semibold text-sm">
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                            <i class="fa-solid fa-arrow-up"></i>
+                            <span>25</span>
+                        </span>
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                            <i class="fa-regular fa-comment"></i>
+                            <span>2</span>
+                        </span>
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </span>
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                            <i class="fa-solid fa-link"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-gray-800 p-4 md:p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                        <img class="w-8 h-8 md:w-10 md:h-10 rounded-full" src="./image/img12.jpg" alt="">
+                        <img class="w-8 h-8 md:w-10 md:h-10 rounded-full" src="./image/img3.jpg" alt="">
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold my-3">Practice combining development and operations to streamline software</h2>
+                    <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                        <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                        <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                        <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                        <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                    </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                    <div class="bg-gray-700 rounded-lg flex items-center justify-center h-32 md:h-40 mb-4 overflow-hidden">
+                        <img src="./image/img12.jpg" 
+                            alt="image" 
+                            class="object-cover w-full h-full rounded-lg">
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center justify-between p-2 rounded-lg text-gray-300 font-semibold text-sm">
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                            <i class="fa-solid fa-arrow-up"></i>
+                            <span>25</span>
+                        </span>
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                            <i class="fa-regular fa-comment"></i>
+                            <span>2</span>
+                        </span>
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </span>
+                        <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                            <i class="fa-solid fa-link"></i>
+                        </span>
+                    </div>
+                </div>
+
+
+
+                        <!-- Card 3 -->
+           <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon5.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2"> Software that enables machines to mimic human intelligence. </h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img1.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>63</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>3</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+
+
+
+                 
+                <!-- Card 4 -->
+                <div class="bg-gradient-to-b from-gray-700 to-gray-600 p-6 rounded-2xl shadow-lg flex flex-col justify-between">
+                    <div>
+                    <h2 class="text-2xl font-bold mb-1">Stop Juggling Tools – Get Everything You Need in One Place with ClickUp</h2>
+                    </div>
+                     <span class="text-lg text-white-600 p-[4px_10px]  font-semibold">Promoted</span>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img3.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+                <div class="flex items-center justify-between p-0 rounded-lg text-gray-300 font-semibold">
+                    <span><i class="fa-solid fa-repeat"></i></span>
+                    <h4>Remove</h4>
+                </div>
+
+                  
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon.jpg" alt=""></span>
+                    <h2 class="text-2xl font-bold mb-2">A Powerfull desing tool for e-commerce platform</h2>
+                    <div class="flex gap-2 text-xs text-gray-400 mb-4">
+                    <span>#webdev</span>
+                    <span>#java</span>
+                    <span>+3</span>
+                    </div>
+                    <p class="text-gray-400 text-xs mb-2">Yesterday • 2m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img5.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+                </div>
+
+                <!-- Card 6 -->
+                 <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon2.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">Why I still Love php and Laravel 20+ years</h2>
+                    <div class="flex gap-2 text-xs text-gray-400 mb-4">
+                    <span>#webdev</span>
+                    <span>#java</span>
+                    <span>+3</span>
+                    </div>
+        
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img6.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                        </div>
+                    <div class="flex items-center justify-between p-0 rounded-lg text-gray-300 font-semibold">
+                    <span><i class="fa-solid fa-repeat"></i></span>
+                    <span><i class="fa-solid fa-message"></i></span>
+                    <h4>Remove</h4>
+                </div>
+                </div>
+
+
+                 
+                <!-- Card 7 -->
+                   <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon2.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">Protecting software systems from digital attacks and unauthorized access.</h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#webdev</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#testing</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Yesterday • 2m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img7.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>36</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>42</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+
+                <!-- Card 8 -->
+                 <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon2.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">Delivering software and services over the internet without local servers</h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img8.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>32</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>6</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+
+                <!-- Card 9 -->
+                <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon5.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2"> Software that enables machines to mimic human intelligence. </h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img3.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>22</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>54</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+
+
+
+
+                <!-- Card 10 -->
+          <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon5.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2"> Software that enables machines to mimic human intelligence. </h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img9.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>25</span>
+                    </span>
+
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>2</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+
+
+             <!-- Card 11 -->
+                <div class="bg-gradient-to-b from-gray-700 to-gray-600 p-6 rounded-2xl shadow-lg flex flex-col justify-between">
+                    <div>
+                    <h2 class="text-2xl font-bold mb-4">We made an AI suffer so you don't have to</h2>
+                    <p class="text-gray-300 mb-6 text-sm">
+                        We sent an AI agent to read the entire internet. Every release, every hot take, 
+                        and every unreadable blog post from the past week. It's now standing by to build 
+                        a presidential brief just for you. It barely survived. You (hopefully) will.
+                    </p>
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/img11.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon2.jpg" alt=""></span>
+                    </div>
+
+                    </div>
+                    <button class="w-full py-2 rounded-lg bg-gradient-to-r from-purple-400 to-orange-200 text-black font-semibold cursor-pointer">
+                    Deploy the agent
+                    </button>
+                </div>
+
+                <!-- Card 12 -->
+            <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon5.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2"> Software that enables machines to mimic human intelligence. </h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img10.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>25</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>2</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+
+
+                 
+                <!-- Card 13 -->
+               <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon5.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2"> Software that enables machines to mimic human intelligence. </h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img11.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>26</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>6</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+
+                <!-- Card 14 -->
+           <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/img12.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/img3.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2"> Software that enables machines to mimic human intelligence. </h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img12.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>36</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>7</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+
+                <!-- Card 15 -->
+               <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon5.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2"> Software that enables machines to mimic human intelligence. </h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 15m watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img13.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>85</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>32</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+                 
+                <!-- Card 16 -->
+                <div class="bg-gradient-to-b from-gray-700 to-gray-600 p-6 rounded-2xl shadow-lg flex flex-col justify-between">
+                    <div>
+                    <h2 class="text-2xl font-bold mb-4">We made an AI suffer so you don't have to</h2>
+                    <p class="text-gray-300 mb-6 text-sm">
+                        We sent an AI agent to read the entire internet. Every release, every hot take, 
+                        and every unreadable blog post from the past week. It's now standing by to build 
+                        a presidential brief just for you. It barely survived. You (hopefully) will. Every release, every hot take, 
+                        and every unreadable blog post from the past week. 
+                    </p>
+                      <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    </div>
+                    <button class="w-full py-2 rounded-lg bg-gradient-to-r from-purple-400 to-orange-200 text-black font-semibold cursor-pointer">
+                    Deploy the agent
+                    </button>
+                </div>
+
+                <!-- Card 17 -->
+               <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div class="flex gap-3">
+                           <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon3.jpg" alt=""></span>
+                     <span><img class="w-10 h-10 rounded-full mb-2" src="./image/icon5.jpg" alt=""></span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2"> Ensuring software quality through automated and manual testing methods. </h2>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#java</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#python</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">#css</span>
+                    <span class="bg-gray-700 px-2 py-1 rounded-full">+1</span>
+                </div>
+                    <p class="text-gray-400 text-xs mb-2">Today • 3hout watch time</p>
+                     <div class="bg-gray-700 rounded-lg flex items-center justify-center h-40 mb-4 overflow-hidden">
+                    <img src="./image/img14.jpg" 
+                        alt="image" 
+                        class="object-cover w-full h-full rounded-lg">
+                </div>
+
+                 <!-- Action Buttons -->
+                <div class="flex items-center justify-between bg-gray-800 p-2 rounded-lg text-gray-300 font-semibold">
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-blue-500">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>135</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-green-500">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>6</span>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-yellow-500">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <script>
+        
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const sidebar = document.getElementById('sidebar');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('inset-0');
+            sidebar.classList.toggle('w-full');
+        });
+        
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.add('hidden');
+            sidebar.classList.remove('fixed', 'inset-0', 'w-full');
+        });
+        
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !mobileMenuButton.contains(e.target) && window.innerWidth < 768) {
+                sidebar.classList.add('hidden');
+                sidebar.classList.remove('fixed', 'inset-0', 'w-full');
+            }
+        });
+    </script>
+</body>
+</html>
